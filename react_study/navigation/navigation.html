@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Navication</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style type="text/css">
+        .Navigation{
+            background: white;
+        }
+        .Navigation_ul{
+        
+        }
+        .Navigation_menu_li{
+            display: inline-block;
+        }
+        .Navigation_menu_li_a{
+            background: red;
+            width: 150px;
+            border: solid 1px blueviolet;
+            text-align: center;
+            display: block;
+            line-height: 30px;
+            text-decoration:none !important;
+            color :wheat;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/jsx">
+        function Menu(props){
+            return (<li className="Navigation_menu_li"><a className="Navigation_menu_li_a" href={props.url}>{props.name}</a></li>);
+        }
+        function Navigation(){
+            return (
+            <div className="Navigation">    
+             <ul className="Navigation_ul">
+                <Menu url="http://naver.com" name="naver" />
+                <Menu url="http://google.com" name="google" />
+                <Menu url="http://daum.net" name="daum" />
+                <Menu url="http://daum.net" name="daum" />
+                <Menu url="http://daum.net" name="daum" />
+                <Menu url="http://daum.net" name="daum" />
+                </ul>
+            </div>
+            );
+
+        }
+        ReactDOM.render(
+            <Navigation />,
+            document.getElementById('root')
+          );
+        
+    </script>
+    
+</body>
+</html>
