@@ -9,7 +9,9 @@ class  App extends React.Component {
   {
       super(props);
       this.state ={
+          mode: 'read',
           subject : {title:'My Header!!', subtitle:"subtitle!!",desc:"hello World!!"},
+          welcome:{title:"Welcome", desc: "Hello , React!!!!!"},
           contents:[
             {id: 1, title:'HTML', desc:"html is for information"},
             {id: 2, title:'JAVA', desc:"JAVA is for information"},
@@ -21,14 +23,33 @@ class  App extends React.Component {
   
   }
   render(){
+    let _title = null;
+    let _desc = null;
+    if(this.state.mode === 'Welcome'){
+      _title = this.state.welcome.title;
+      _desc = this.state.welcome.desc;
+    }else if (this.state.mode === 'read')
+    {
+      _title = this.state.contents[0].title;
+      _desc = this.state.contents[0].desc;
+    }
   return (
     <div className="App">
+    
       <MyHeader 
+          tolink={"#"}
+          clickEvent={(e)=>{
+           e.preventDefault();
+           this.setState(
+             {mode: this.state.mode === "Welcome" ? 'read':'Welcome'});
+          }}
           title={this.state.subject.title}
           subtitle={this.state.subject.subtitle}
           desc={this.state.subject.desc}
       />
-      <Contents data={this.state.contents} />
+
+      <hr />
+      <Contents title={_title} desc={_desc} data={this.state.contents} />
     </div>
   );
   }

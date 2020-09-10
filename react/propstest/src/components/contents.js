@@ -12,7 +12,10 @@ class Contents extends React.Component{
             list.push(<li key={data[i].id} ><a href={ `${data[i].id}`} >{data[i].title}</a></li>);
         }
         return(
+
             <div className="content-container">
+                <h2>{this.props.title}</h2>
+                <h3>{this.props.desc}</h3>
                 <ul>
                     {list}
                 </ul>
