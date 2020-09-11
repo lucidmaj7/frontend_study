@@ -10,14 +10,15 @@ class  App extends React.Component {
       super(props);
       this.state ={
           mode: 'read',
+          selected_content_id:2,
           subject : {title:'My Header!!', subtitle:"subtitle!!",desc:"hello World!!"},
           welcome:{title:"Welcome", desc: "Hello , React!!!!!"},
           contents:[
-            {id: 1, title:'HTML', desc:"html is for information"},
-            {id: 2, title:'JAVA', desc:"JAVA is for information"},
-            {id: 3, title:'PYTHON', desc:"PYTHON is for information"},
-            {id: 4, title:'JAVASCRIPT', desc:"JAVASCRIPT is for information"},
-            {id: 5, title:'C++', desc:"C++ is for information"},
+            {id: 0, title:'HTML', desc:"html is for information"},
+            {id: 1, title:'JAVA', desc:"JAVA is for information"},
+            {id: 2, title:'PYTHON', desc:"PYTHON is for information"},
+            {id: 3, title:'JAVASCRIPT', desc:"JAVASCRIPT is for information"},
+            {id: 4, title:'C++', desc:"C++ is for information"},
           ]
       };
   
@@ -30,8 +31,9 @@ class  App extends React.Component {
       _desc = this.state.welcome.desc;
     }else if (this.state.mode === 'read')
     {
-      _title = this.state.contents[0].title;
-      _desc = this.state.contents[0].desc;
+      let selected = this.state.selected_content_id;
+      _title = this.state.contents[selected].title;
+      _desc = this.state.contents[selected].desc;
     }
   return (
     <div className="App">
@@ -41,7 +43,7 @@ class  App extends React.Component {
           clickEvent={(e)=>{
            e.preventDefault();
            this.setState(
-             {mode: this.state.mode === "Welcome" ? 'read':'Welcome'});
+             {mode: "Welcome"});
           }}
           title={this.state.subject.title}
           subtitle={this.state.subject.subtitle}
@@ -49,7 +51,15 @@ class  App extends React.Component {
       />
 
       <hr />
-      <Contents title={_title} desc={_desc} data={this.state.contents} />
+      <Contents title={_title} desc={_desc} data={this.state.contents} dataselect={(e)=>{
+          e.preventDefault();
+          this.setState(
+            {mode:  'read' });
+          this.setState({selected_content_id: e.target.dataset.id });
+       // alert(id);
+
+
+      }} />
     </div>
   );
   }

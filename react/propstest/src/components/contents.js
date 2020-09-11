@@ -8,8 +8,7 @@ class Contents extends React.Component{
         let list = [];
         for(let i = 0; i<data.length ;i++)
         {
-            
-            list.push(<li key={data[i].id} ><a href={ `${data[i].id}`} >{data[i].title}</a></li>);
+            list.push(<li key={data[i].id} ><a href={ `${data[i].id}`} data-id={data[i].id} onClick={this.props.dataselect}>{data[i].title}</a></li>);
         }
         return(
 
