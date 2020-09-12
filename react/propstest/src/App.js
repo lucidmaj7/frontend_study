@@ -56,8 +56,6 @@ class  App extends React.Component {
           this.setState(
             {mode:  'read' });
           this.setState({selected_content_id: e.target.dataset.id });
-       // alert(id);
-
 
       }} />
     </div>
