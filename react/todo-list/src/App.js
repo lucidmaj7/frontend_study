@@ -24,18 +24,30 @@ class App extends React.Component {
     let newTodo = [];
     for(let i = 0 ;i<this.state.todoList.length;i++)
     {
+   
       if(this.state.todoList[i].id != id)
       {
           newTodo.push(this.state.todoList[i]);
       }
     }
+    this.setState({todoList:newTodo});
 
-    
 
   }
   onTodoFinish(id)
   {
-    alert("onTodoFinish");
+    let newTodo = [];
+    for(let i = 0 ;i<this.state.todoList.length;i++)
+    {
+      let item = this.state.todoList[i];
+      if(item.id == id)
+      {
+         item.status = 1;
+      }
+      newTodo.push(item);
+    }
+    this.setState({todoList:newTodo});
+
   }
   render(){
   return (
@@ -45,10 +57,9 @@ class App extends React.Component {
         //  alert(todo);
           let todo ={id:this.uuidv4(),
                     title: todoValue,
-                    state: '0'
+                    status: '0'
                    };
-          //let list = this.state.todoList.push({id: this.state.todoList.length});
-          //this.setState({todoList:list});
+    
           this.setState({todoList:[...this.state.todoList,todo]});
         }}></Header>
         <TodoList 

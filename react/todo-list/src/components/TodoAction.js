@@ -7,7 +7,7 @@ class TodoAction extends React.Component{
                 <ul>
                     <li><a href="" onClick={(e)=>{
                         e.preventDefault();
-                        this.props.onDelete(this.props.todoId);
+                        this.props.onFinish(this.props.todoId);
                     }}>완료</a></li>
                     <li><a 
                     onClick={(e)=>{

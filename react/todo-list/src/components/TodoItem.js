@@ -6,8 +6,8 @@ class TodoItem extends React.Component{
     render(){
         return(
             <div className="todo-item-wrap" data-todo-id={this.props.todoId}>
-                <p>{this.props.todoTitle}</p>
-                <TodoAction todoId={this.props.todoId} onDelete={this.props.onDelete}></TodoAction>
+                <p>{`${this.props.todoTitle}  ${this.props.todoStatus}`}</p>
+                <TodoAction todoId={this.props.todoId} onDelete={this.props.onDelete} onFinish={this.props.onFinish}></TodoAction>
             </div>
         );
     }

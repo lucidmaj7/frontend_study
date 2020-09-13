@@ -15,9 +15,10 @@ class TodoList extends React.Component{
             list.push(<li key={i}><TodoItem 
                 
                 onDelete= {this.props.onDelete}
+                onFinish = {this.props.onFinish}
                 todoTitle={this.props.data[i].title}
                 todoId= {this.props.data[i].id}
-                todoState = { this.props.data[i].status}
+                todoStatus = { this.props.data[i].status}
                 ></TodoItem></li>);
         }
 
