@@ -23,7 +23,7 @@ class TodoInput extends React.Component{
                         
                     }} type='text' value={this.state.todoValue}></input>
                    
-                    <input  type='submit'></input>
+                    <input  type='submit' value="추가"></input>
                 </form>
                
             </div>

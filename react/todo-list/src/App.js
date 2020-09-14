@@ -1,5 +1,6 @@
 import React from 'react';
 
+import "./App.css";
 import Header from './components/Header';
 import TodoList from './components/TodoList';
 
@@ -42,7 +43,7 @@ class App extends React.Component {
       let item = this.state.todoList[i];
       if(item.id == id)
       {
-         item.status = 1;
+        item.status = 1;
       }
       newTodo.push(item);
     }
@@ -53,6 +54,7 @@ class App extends React.Component {
   return (
 
       <div className="App">
+        <div className="todo-container">
         <Header addTodo={(todoValue)=>{
         //  alert(todo);
           let todo ={id:this.uuidv4(),
@@ -68,6 +70,7 @@ class App extends React.Component {
           onFinish={this.onTodoFinish}
           
           ></TodoList>
+          </div>
       </div>
   );
   }
