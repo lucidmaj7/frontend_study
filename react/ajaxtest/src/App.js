@@ -1,23 +1,8 @@
 import React, { useEffect ,useState} from 'react';
 
 function Nav(props){
-  let [list,setList] = useState([]);
-  let [isFetch,setIsFetch] = useState(false);
 
-  useEffect(()=>{
-    if(isFetch===false)
-    { 
-      fetch('list.json')
-      .then((res)=>{
-        return res.json();
-      }).then((json)=>{
-        console.log("fetch");
-        setIsFetch(true);
-        setList(json);
-      });
-    }
-  },);
-
+  let list = props.data;
   let navlist = [];
 
   for(let i = 0;i<list.length;i++)
@@ -25,8 +10,6 @@ function Nav(props){
     navlist.push(<li key={list[i].id} ><a href={list[i].id} onClick={(e)=>{
       e.preventDefault();
       props.onClick(list[i].id);
-
-
     }}> {list[i].title}</a></li>);
   }
 
@@ -40,45 +23,58 @@ function Nav(props){
 }
 
 function Article(props){
-  let [title,setTitle] = useState(props.title);
-  let [desc,setDesc] = useState(props.desc);
-
-
-  useEffect(()=>{
-    if(props.id!==0)
-    { 
-      fetch(`${props.id}.json`)
-      .then((res)=>{
-        return res.json();
-      }).then((json)=>{
-        console.log("Article Fetched!");
-        setTitle(json.title);
-        setDesc(json.desc);
-      }).catch(()=>{
-        setTitle(`${props.id} is not found`);
-        setDesc("");
-      });
-    }
-  },[props.id]);
 
   return(
     <article>
-      <h2>{title}</h2>
-      <p>{desc}</p>
+      <h2>{props.title}</h2>
+      <p>{props.desc}</p>
     </article>
   );
 }
 
 function App() {
   let [selected , setSelect]=useState(0);
+  let [navList, setNavList] = useState([]);
+  let [isNavFetch,setIsNavFetch] = useState(false);
+  let [_title,setTitle] = useState("Welcome");
+  let [_desc,setDesc] = useState("Hello React~");
+
+
+  useEffect(()=>{
+    if(isNavFetch===false)
+    {
+      fetch('list.json')
+      .then((res)=>{
+        return res.json();
+      }).then((json)=>{
+        console.log("fetch");
+        setIsNavFetch(true);
+        setNavList(json);
+      });
+    }
+  },[navList]);
+
   return (
     <div className="App">
       <h1>WEB</h1>
-      <Nav onClick={(id)=>{
+      <Nav data={navList} onClick={(id)=>{
           console.log(`id is clicked ${id}`);
-          setSelect(id);
+          if(id!==0)
+          { 
+            fetch(`${id}.json`)
+            .then((res)=>{
+              return res.json();
+            }).then((json)=>{
+              console.log("Article Fetched!");
+              setTitle(json.title);
+              setDesc(json.desc);
+            }).catch(()=>{
+              setTitle(`${id} is not found`);
+              setDesc("");
+            });
+          }
       }}></Nav>
-      <Article id={selected} title={"Welcome"} desc={"Hello React~"}></Article>
+      <Article id={selected} title={_title} desc={_desc}></Article>
     </div>
   );
 }
