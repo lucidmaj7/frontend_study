@@ -34,7 +34,7 @@ function Article(props){
 
 function App() {
   let [selected , setSelect]=useState(0);
-  let [navList, setNavList] = useState([]);
+  let [navList, setNavList] = useState([ ]);
   let [isNavFetch,setIsNavFetch] = useState(false);
   let [_title,setTitle] = useState("Welcome");
   let [_desc,setDesc] = useState("Hello React~");
