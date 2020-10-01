@@ -4,7 +4,7 @@ function AddNumberRoot(props){
     return(
       <div>
         <h1>Add Number Root</h1>
-        <AddNumber onAddNumber={props.onAddNumber}></AddNumber>
+        <AddNumber ></AddNumber>
       </div>
     );
   }

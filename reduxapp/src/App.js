@@ -7,14 +7,12 @@ import './App.css';
 
 
 function App() {
-  let [number,setNumber] = useState(3);
+ 
   return (
     <div className="App">
       <h1>Root</h1>
-      <AddNumberRoot onAddNumber={(num)=>{
-        setNumber(Number(number)+Number(num));
-      }}></AddNumberRoot>
-      <DisplayNumberRoot number={number}></DisplayNumberRoot>
+      <AddNumberRoot></AddNumberRoot>
+      <DisplayNumberRoot></DisplayNumberRoot>
     </div>
   );
 }
