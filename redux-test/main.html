@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="./node_modules/redux/dist/redux.js"> </script>
+    <title>Document</title>
+</head>
+<body>
+   <div id="subject"></div>    
+    <div id="toc"></div>
+    <div id="control"></div>
+    <div id="content"></div>
+
+
+<script>
+    
+    const store = Redux.createStore((state, action)=>{
+        if(state===undefined){
+            return {
+                selected: 1,
+                content:[{
+                    id: 1,
+                    title: "HTML",
+                    desc: "HTML is..."
+                },
+                {
+                    id: 2,
+                    title: "CSS",
+                    desc: "CSS is..."
+                },
+                {
+                    id: 3,
+                    title: "JS",
+                    desc: "JS is..."
+                }
+                ]
+            };
+        }
+        let newState={};
+        if(action.type === 'SELECT'){
+            console.log(action);
+            newState = Object.assign({}, state,{selected: action.id});
+        }
+        console.log(action, state, newState);
+        return newState;
+    });
+
+    
+    function subject(){
+       
+        document.querySelector('#subject').innerHTML = `
+        <header>
+        <h1>WEB</h1>
+        Hello Web!
+        </header>
+        `;
+    }
+
+    function TOC(){
+        let state = store.getState();
+        let inner = '';
+        for(let i = 0 ;i<state.content.length;i++){
+            inner+= `<li key='${state.content[i].id}'>
+            <a onclick="
+                event.preventDefault();
+                let action = {type:'SELECT', id:${state.content[i].id}};
+                store.dispatch(action);
+            " href="#">${state.content[i].title}</a>
+            </li>`;
+        }
+
+        document.querySelector('#toc').innerHTML = `
+        <nav>
+            <ol>
+               ${inner}
+            </ol>
+        </nav>
+        
+        `;
+        
+    }
+    function control(){
+        document.querySelector("#control").innerHTML =`
+        <ul>
+            <li><button>생성</button></li>
+            <li><button>삭제</button></li>
+            </ul>
+        `;
+    }
+    function article(){
+        let state = store.getState();
+        let inner =``;
+        for(let i = 0;i<state.content.length;i++)
+        {
+            if(state.content[i].id == state.selected){
+                console.log(`selected!!! ${state.content[i].id }`);
+                inner = `<h2>${state.content[i].title}</h2>
+                ${state.content[i].desc}`;
+                break;
+            }
+        }
+        document.querySelector('#content').innerHTML = `
+            <article>
+            ${inner}
+            </article>
+        `;
+    }
+    subject();
+    TOC();
+
+    control();
+    article();
+    store.subscribe(article);
+
+</script>
+    
+  
+</body>
+</html>
